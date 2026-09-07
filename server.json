@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.capawesome/mcp",
+  "description": "The official MCP server for Capawesome documentation and Capawesome Cloud.",
+  "version": "0.0.1",
+  "websiteUrl": "https://capawesome.io/",
+  "repository": {
+    "url": "https://github.com/capawesome-team/mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.capawesome.io/mcp"
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@capawesome/mcp",
+      "version": "0.0.1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
