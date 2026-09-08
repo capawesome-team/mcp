@@ -15,7 +15,7 @@ permissions:
   pull-requests: write
 
 env:
-  NODE_VERSION: 24
+  NODE_VERSION: 22
   MCP_PUBLISHER_VERSION: 1.8.1
 
 jobs:

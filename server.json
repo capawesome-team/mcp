@@ -3,7 +3,7 @@
   "name": "io.capawesome/mcp",
   "description": "The official MCP server for Capawesome documentation and Capawesome Cloud.",
   "version": "0.0.2",
-  "websiteUrl": "https://capawesome.io/",
+  "websiteUrl": "https://capawesome.io/docs/ai/mcp/capawesome/",
   "repository": {
     "url": "https://github.com/capawesome-team/mcp",
     "source": "github"

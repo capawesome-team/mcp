@@ -33,6 +33,7 @@
     "capawesome",
     "capawesome-cloud",
     "mcp",
+    "mcp-server",
     "model-context-protocol"
   ],
   "author": "Robin Genz <mail@robingenz.dev>",
@@ -44,7 +45,7 @@
   "bugs": {
     "url": "https://github.com/capawesome-team/mcp/issues"
   },
-  "homepage": "https://capawesome.io/",
+  "homepage": "https://capawesome.io/docs/ai/mcp/capawesome/",
   "funding": [
     {
       "type": "github",
