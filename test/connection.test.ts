@@ -19,6 +19,12 @@ describe('resolveConnection', () => {
     );
   });
 
+  it('rejects a malformed CAPAWESOME_MCP_URL with a readable message', () => {
+    expect(() =>
+      resolveConnection({ CAPAWESOME_MCP_URL: 'not a url' }),
+    ).toThrow('Invalid MCP server URL "not a url".');
+  });
+
   it('passes the toolsets on as a query parameter', () => {
     expect(
       resolveConnection({ CAPAWESOME_MCP_TOOLSETS: 'docs,cloud-apps' }).url,

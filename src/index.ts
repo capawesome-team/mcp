@@ -5,14 +5,25 @@ import {
 } from '@modelcontextprotocol/client';
 import { Server } from '@modelcontextprotocol/server';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
-import { resolveConnection } from './connection.js';
+import { Connection, resolveConnection } from './connection.js';
 import { PACKAGE_INFO } from './package-info.js';
 
 /** The only capability the remote server exposes. */
 const PROXIED_METHODS = ['tools/list', 'tools/call'] as const;
 
+function resolveConnectionOrExit(): Connection {
+  try {
+    return resolveConnection();
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : 'Invalid configuration.';
+    process.stderr.write(`${message}\n`);
+    process.exit(1);
+  }
+}
+
 async function connectToRemoteServer(): Promise<Client> {
-  const { headers, url } = resolveConnection();
+  const { headers, url } = resolveConnectionOrExit();
   const client = new Client(PACKAGE_INFO);
   try {
     await client.connect(

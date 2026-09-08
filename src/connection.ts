@@ -27,7 +27,7 @@ function resolveHeaders(env: NodeJS.ProcessEnv): Record<string, string> {
 }
 
 function resolveUrl(env: NodeJS.ProcessEnv): string {
-  const url = new URL(env.CAPAWESOME_MCP_URL || DEFAULT_URL);
+  const url = parseUrl(env.CAPAWESOME_MCP_URL || DEFAULT_URL);
   if (env.CAPAWESOME_MCP_TOOLSETS) {
     url.searchParams.set('toolsets', env.CAPAWESOME_MCP_TOOLSETS);
   }
@@ -35,4 +35,12 @@ function resolveUrl(env: NodeJS.ProcessEnv): string {
     url.searchParams.set('readonly', 'true');
   }
   return url.toString();
+}
+
+function parseUrl(value: string): URL {
+  try {
+    return new URL(value);
+  } catch {
+    throw new Error(`Invalid MCP server URL "${value}".`);
+  }
 }
