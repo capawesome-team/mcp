@@ -8,8 +8,6 @@ Maintained by [Capawesome](https://capawesome.io).
 
 The server is hosted and ready to use:
 
-https://mcp.capawesome.io/mcp
-
 ```
 https://mcp.capawesome.io/mcp
 ```
@@ -20,8 +18,17 @@ The documentation tools need no account and no token. The Capawesome Cloud tools
 
 ### Claude Code
 
+For the documentation tools, no token is needed:
+
 ```bash
 claude mcp add --transport http capawesome https://mcp.capawesome.io/mcp
+```
+
+To add the Capawesome Cloud tools, pass your API token as a bearer header and select the toolsets:
+
+```bash
+claude mcp add --transport http capawesome "https://mcp.capawesome.io/mcp?toolsets=all" \
+  --header "Authorization: Bearer YOUR_TOKEN"
 ```
 
 ### Claude Desktop / Claude.ai
@@ -143,7 +150,7 @@ The endpoint is limited to **100 requests per minute per IP**. Requests over the
 
 ## Privacy
 
-Your IP address is processed for rate limiting only. Queries and tool arguments are not stored, not logged beyond Cloudflare's standard edge logs, and never used for training. Your API token is used to authenticate against the Capawesome Cloud API on your behalf and is not stored by the server.
+Your IP address is processed for rate limiting only. Queries and tool arguments are not stored, not logged beyond Cloudflare's standard edge logs, and never used for training. Your API token is used to authenticate against the Capawesome Cloud API on your behalf and is not stored by the server. See the [Privacy Policy](https://capawesome.io/legal/privacy-policy/) for details.
 
 ## Related
 
