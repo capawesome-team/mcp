@@ -16,6 +16,7 @@ permissions:
 
 env:
   NODE_VERSION: 24
+  MCP_PUBLISHER_VERSION: 1.8.1
 
 jobs:
   release:
@@ -42,3 +43,23 @@ jobs:
       - name: Publish to npm
         if: ${{ steps.release-please.outputs.release_created }}
         run: npm publish --provenance
+      - name: Download MCP Publisher
+        if: ${{ steps.release-please.outputs.release_created }}
+        run: |
+          curl -fsSL -o mcp-publisher.tar.gz "https://github.com/modelcontextprotocol/registry/releases/download/v${MCP_PUBLISHER_VERSION}/mcp-publisher_linux_amd64.tar.gz"
+          tar -xzf mcp-publisher.tar.gz mcp-publisher
+      - name: Publish to MCP Registry
+        if: ${{ steps.release-please.outputs.release_created }}
+        env:
+          MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
+        run: |
+          ./mcp-publisher validate
+          ./mcp-publisher login dns --domain=capawesome.io --private-key="$MCP_REGISTRY_PRIVATE_KEY"
+          for attempt in $(seq 1 5); do
+            if ./mcp-publisher publish; then
+              exit 0
+            fi
+            echo "Publish attempt ${attempt} of 5 failed. The new npm version may not be available yet."
+            sleep 20
+          done
+          exit 1

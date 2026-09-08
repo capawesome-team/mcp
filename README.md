@@ -167,6 +167,10 @@ Set `CAPAWESOME_MCP_URL` to point the proxy at a local server instead of the hos
 CAPAWESOME_MCP_URL=http://localhost:8787/mcp node dist/index.js
 ```
 
+## Release
+
+Releases are managed by [release-please](https://github.com/googleapis/release-please). Merging its release pull request tags the version, publishes the package to npm and then publishes `server.json` to the [MCP Registry](https://registry.modelcontextprotocol.io). The version in `server.json` is bumped by release-please together with `package.json`, so it never has to be edited by hand. To publish to the registry manually, install [`mcp-publisher`](https://github.com/modelcontextprotocol/registry), run `mcp-publisher login dns --domain=capawesome.io --private-key=<key>` with the Ed25519 private key from the password manager and then `mcp-publisher publish`.
+
 ## License
 
 See [LICENSE](LICENSE).
