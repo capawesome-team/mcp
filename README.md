@@ -18,6 +18,14 @@ The documentation tools need no account and no token. The Capawesome Cloud tools
 
 ### Claude Code
 
+For the documentation tools, no token is needed:
+
+```bash
+claude mcp add --transport http capawesome https://mcp.capawesome.io/mcp
+```
+
+To add the Capawesome Cloud tools, pass your API token as a bearer header and select the toolsets:
+
 ```bash
 claude mcp add --transport http capawesome "https://mcp.capawesome.io/mcp?toolsets=all" \
   --header "Authorization: Bearer YOUR_TOKEN"
