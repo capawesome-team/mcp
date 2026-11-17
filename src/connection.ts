@@ -18,7 +18,7 @@ export function resolveConnection(
 
 function resolveHeaders(env: NodeJS.ProcessEnv): Record<string, string> {
   const headers: Record<string, string> = {
-    'User-Agent': `${PACKAGE_INFO.name}/${PACKAGE_INFO.version}`,
+    'User-Agent': `capawesome-mcp/${PACKAGE_INFO.version}`,
   };
   if (env.CAPAWESOME_TOKEN) {
     headers.Authorization = `Bearer ${env.CAPAWESOME_TOKEN}`;
