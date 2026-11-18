@@ -42,7 +42,7 @@ describe('resolveConnection', () => {
 
   it('identifies the package via the User-Agent header', () => {
     expect(resolveConnection({}).headers['User-Agent']).toMatch(
-      /^@capawesome\/mcp\/\d+\.\d+\.\d+/,
+      /^capawesome-mcp\/\d+\.\d+\.\d+/,
     );
   });
 
