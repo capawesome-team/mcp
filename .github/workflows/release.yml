@@ -54,12 +54,15 @@ jobs:
           MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
         run: |
           ./mcp-publisher validate
-          ./mcp-publisher login dns --domain=capawesome.io --private-key="$MCP_REGISTRY_PRIVATE_KEY"
-          for attempt in $(seq 1 5); do
+          # npm can take a few minutes to list a new version, and the registry refuses one npm does not list yet.
+          # Each attempt logs in again, because a registry token lasts only 5 minutes.
+          max_attempts=10
+          for attempt in $(seq 1 "${max_attempts}"); do
+            ./mcp-publisher login dns --domain=capawesome.io --private-key="$MCP_REGISTRY_PRIVATE_KEY"
             if ./mcp-publisher publish; then
               exit 0
             fi
-            echo "Publish attempt ${attempt} of 5 failed. The new npm version may not be available yet."
-            sleep 20
+            echo "Publish attempt ${attempt} of ${max_attempts} failed. The new npm version may not be available yet."
+            sleep 30
           done
           exit 1
